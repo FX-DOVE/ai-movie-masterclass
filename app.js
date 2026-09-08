@@ -32,15 +32,18 @@ for (let i = 0; i < 4; i++) {
 }
 
 
-const video = document.getElementById("preview-video");
-if (video) {
+function protectPreview(video, src) {
+  if (!video) return;
   video.controlsList = "nodownload noplaybackrate";
   video.disablePictureInPicture = true;
   video.addEventListener("contextmenu", (e) => e.preventDefault());
   video.addEventListener("dragstart", (e) => e.preventDefault());
-  fetch("assets/lesson.mp4").then((r) => r.blob()).then((blob) => {
+  fetch(src).then((r) => r.blob()).then((blob) => {
     video.src = URL.createObjectURL(blob);
   }).catch(() => {
-    video.src = "assets/lesson.mp4";
+    video.src = src;
   });
 }
+
+protectPreview(document.getElementById("preview-video"), "assets/lesson.mp4");
+protectPreview(document.getElementById("thesame-video"), "assets/thesame-1-preview.mp4");
