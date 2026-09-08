@@ -31,19 +31,21 @@ for (let i = 0; i < 4; i++) {
   field.appendChild(ring);
 }
 
-
-function protectPreview(video, src) {
+function lockPreview(video, asset) {
   if (!video) return;
-  video.controlsList = "nodownload noplaybackrate";
+  video.controlsList = "nodownload";
   video.disablePictureInPicture = true;
+  video.removeAttribute("src");
   video.addEventListener("contextmenu", (e) => e.preventDefault());
   video.addEventListener("dragstart", (e) => e.preventDefault());
-  fetch(src).then((r) => r.blob()).then((blob) => {
+  fetch(asset).then((r) => {
+    if (!r.ok) throw new Error("preview");
+    return r.blob();
+  }).then((blob) => {
     video.src = URL.createObjectURL(blob);
-  }).catch(() => {
-    video.src = src;
-  });
+  }).catch(() => {});
 }
 
-protectPreview(document.getElementById("preview-video"), "assets/lesson.mp4");
-protectPreview(document.getElementById("thesame-video"), "assets/thesame-1-preview.mp4");
+lockPreview(document.getElementById("preview-video"), "assets/lesson.mp4");
+lockPreview(document.getElementById("preview-thesame"), "assets/preview-thesame.mp4");
+lockPreview(document.getElementById("preview-0827"), "assets/preview-0827.mp4");
