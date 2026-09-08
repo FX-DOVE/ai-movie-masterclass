@@ -95,3 +95,38 @@ footer p { color: var(--gold); letter-spacing: 0.16em; text-transform: uppercase
   .hero, .cards, .curriculum { grid-template-columns: 1fr; }
   .cards article { min-height: 0; }
 }
+
+.atoms { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.atom {
+  position: absolute; border-radius: 50%;
+  background: radial-gradient(circle, rgba(230,195,106,0.9), rgba(61,124,255,0.15) 70%, transparent 72%);
+  animation: drift linear infinite;
+  opacity: 0.7;
+}
+.ring {
+  position: absolute; border: 1px solid rgba(230,195,106,0.35); border-radius: 50%;
+  animation: spin 28s linear infinite;
+}
+body > * { position: relative; z-index: 1; }
+.hero h1 { animation: rise 0.9s ease both; }
+.cover img { animation: floaty 6s ease-in-out infinite; }
+.cards article, .curriculum li { animation: rise 0.7s ease both; }
+.cards article:nth-child(2), .curriculum li:nth-child(2) { animation-delay: 0.08s; }
+.cards article:nth-child(3), .curriculum li:nth-child(3) { animation-delay: 0.16s; }
+.nav { animation: rise 0.5s ease both; }
+@keyframes drift {
+  from { transform: translateY(12vh); }
+  to { transform: translateY(-110vh); }
+}
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .atom, .ring, .cover img, .cards article, .curriculum li, .hero h1 { animation: none; }
+}
