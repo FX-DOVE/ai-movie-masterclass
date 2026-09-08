@@ -35,17 +35,12 @@ function lockPreview(video, asset) {
   if (!video) return;
   video.controlsList = "nodownload";
   video.disablePictureInPicture = true;
-  video.removeAttribute("src");
+  video.playsInline = true;
   video.addEventListener("contextmenu", (e) => e.preventDefault());
   video.addEventListener("dragstart", (e) => e.preventDefault());
-  fetch(asset).then((r) => {
-    if (!r.ok) throw new Error("preview");
-    return r.blob();
-  }).then((blob) => {
-    video.src = URL.createObjectURL(blob);
-  }).catch(() => {});
+  video.src = asset;
 }
 
-lockPreview(document.getElementById("preview-video"), "assets/lesson.mp4");
-lockPreview(document.getElementById("preview-thesame"), "assets/preview-thesame.mp4");
-lockPreview(document.getElementById("preview-0827"), "assets/preview-0827.mp4");
+lockPreview(document.getElementById("preview-video"), "assets/lesson.mp4?v=full");
+lockPreview(document.getElementById("film-inheritance"), "assets/the-inheritance.mp4?v=full");
+lockPreview(document.getElementById("film-mansion"), "assets/the-mansion.mp4?v=full");

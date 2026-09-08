@@ -87,11 +87,29 @@ h1 { margin: 6px 0 0; font-size: 2.15rem; line-height: 1; color: var(--gold-2); 
 .player { background: #000; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
 video { width: 100%; background: #000; }
 .preview-list { display: grid; grid-template-columns: 1fr; gap: 18px; }
-.preview-item h3 {
+.preview-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 12px;
   margin: 0 0 10px;
+}
+.preview-item h3 {
+  margin: 0;
   font-family: Cinzel, serif;
   font-size: 1.15rem;
   color: var(--gold-2);
+}
+.runtime {
+  margin: 0;
+  font-family: Outfit, system-ui, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+  flex: 0 0 auto;
+  text-align: right;
 }
 footer { display: grid; justify-items: start; gap: 12px; padding: 20px 0 36px; }
 footer img { width: 44px; height: 44px; border-radius: 50%; }
