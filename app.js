@@ -30,3 +30,17 @@ for (let i = 0; i < 4; i++) {
   ring.style.top = 12 + i * 10 + "%";
   field.appendChild(ring);
 }
+
+
+const video = document.getElementById("preview-video");
+if (video) {
+  video.controlsList = "nodownload noplaybackrate";
+  video.disablePictureInPicture = true;
+  video.addEventListener("contextmenu", (e) => e.preventDefault());
+  video.addEventListener("dragstart", (e) => e.preventDefault());
+  fetch("assets/lesson.mp4").then((r) => r.blob()).then((blob) => {
+    video.src = URL.createObjectURL(blob);
+  }).catch(() => {
+    video.src = "assets/lesson.mp4";
+  });
+}
